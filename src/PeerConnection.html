@@ -1,0 +1,20 @@
+<html lang ="en">
+    <head>
+        <meta charset = "utf-8" /> 
+    </head>
+   <body> 
+        <button id = "loginBtn">Initiate Connection</button> 
+    </body>
+   <!-- <script src="sasPeerConnection.js" ></script> -->
+   <script>
+    loginBtn.addEventListener("click", function(event){
+        const lc = new RTCPeerConnection();
+        const dc = lc.createDataChannel("Channel");
+        dc.onmessage = e => console.log("Got a message"+e.data);
+        dc.onopen = e => console.log("Connection Opened !");
+        
+        lc.onicecandidate = e => console.log("New ICE Candidate ! reprinting SDP"+ JSON.stringify(lc.currentlocalDescription));
+        lc.createOffer().then( o => lc.setlocalDescription(o)).then(a => console.log("set successfully"));
+    });
+   </script>
+</html>  

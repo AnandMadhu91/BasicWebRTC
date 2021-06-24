@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html lang = "en">
+   <head> 
+      <meta charset = "utf-8" /> 
+   </head> 
+	
+   <body> 
+      <video autoplay></video> 
+      <!-- <script src = "Autoplay.js"></script>  -->
+   </body>
+   <script>
+        function hasUserMedia() { 
+            //check if the browser supports the WebRTC 
+            return !!(navigator.getUserMedia || navigator.webkitGetUserMedia || 
+            navigator.mozGetUserMedia); 
+        } 
+        
+        if (hasUserMedia()) { 
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
+            || navigator.mozGetUserMedia; 
+                
+            //enabling video and audio channels 
+            navigator.getUserMedia({ video: true, audio: true }, function (stream) { 
+            var video = document.querySelector('video'); 
+                
+            //inserting our stream to the video tag
+            if ('srcObject' in video) {
+                    video.srcObject = stream;
+            }else{
+                // Fall back for old browsers
+                    video.src = window.URL.createObjectURL(stream); 
+                }
+            }, function (err) {}); 
+        } else { 
+            alert("WebRTC is not supported"); 
+        }
+   </script>
+	
+</html>

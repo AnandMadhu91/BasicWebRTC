@@ -3,7 +3,7 @@ const http = require('http')
 const eventEmitter = require('events')
 const path = require('path')
 const fs = require('fs')
-// const socket = require('socket.io')
+const socket = require('socket.io')
 let autoplay = path.join(__dirname, 'src', 'Autoplay.html')
 
 http.createServer(function (req, res) {
